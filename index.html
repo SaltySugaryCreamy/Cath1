@@ -1,0 +1,103 @@
+---
+title:          GitHub Gallery
+image_folder:   /images/
+max_width:      900px
+sort_by:        modified_time
+date_format:    "%A, %B %-d, %Y"
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A gallery of images with poems link.">
+  <title>{{ page.title }}</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      background-image: url(sage.webp);
+      background-size: cover;
+      margin: 0;
+      font-family: sans-serif;
+    }
+
+    h1 {
+      margin: 1rem;
+    }
+
+    a:link, a:visited {
+      color: black;
+      background-color: transparent;
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: red;
+      text-decoration: underline;
+    }
+
+    a:active {
+      color: green;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      padding: 1rem;
+    }
+
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: auto;
+      transition: transform 0.3s ease;
+    }
+
+    .gallery-item.zoom img {
+      transform: scale(1.8);
+      z-index: 10;
+    }
+
+    footer {
+      text-align: center;
+      margin: 2rem;
+    }
+  </style>
+</head>
+<body>
+
+  <a href="https://saltysugarycreamy.github.io/Cath1/cath.html">
+    <h1 style="text-align:right; font-size:300%;">Poems</h1>xx
+  </a>
+  <h1 style="text-align:left; font-size:500%;">Art Gallery &#9829;</h1>
+
+  <div class="gallery">
+    {% assign imgs = site.static_files | sort: page.sort_by %}
+    {% for img in imgs reversed %}
+      {% if img.path contains page.image_folder %}
+        {% assign img_name = img.path | remove: page.image_folder | split: '.' | first %}
+        {% assign img_date = img.modified_time | date: page.date_format %}
+        <div class="gallery-item" onclick="this.classList.toggle('zoom')">
+          <img src=".{{ img.path }}"
+               alt="{{ img_name }}"
+               title="{{ img_date }}"
+               style="max-width: {{ page.max_width }};">
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+
+  <footer>
+    <a href="https://youtu.be/-Rq9hgYIQZk" target="_blank">I Love You</a>
+  </footer>
+
+</body>
+</html>
